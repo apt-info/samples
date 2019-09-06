@@ -15,23 +15,23 @@ def start(bot: Bot, update: Update):
 
 
 def stop(bot, update: Update):
-    logging.info('>>> start')
+    logging.info('>>> stop')
     bot.send_message(chat_id=update.message.chat_id, text='bye...')
 
 
-def send(bot, update: Update, args):
-    logging.info('>>> send_args')
-    received_args = 'received_args:'
+def search(bot, update: Update, args):
+    logging.info('>>> search')
+    keywords = 'keywords:'
     for arg in args:
-        received_args += '\n - {}'.format(arg)
-    bot.send_message(chat_id=update.message.chat_id, text=received_args)
+        keywords += '\n - {}'.format(arg)
+    bot.send_message(chat_id=update.message.chat_id, text=keywords)
 
 
 def main():
     updater = Updater(TELEGRAM_BOT_TOKEN)
     updater.dispatcher.add_handler(CommandHandler('start', start))
     updater.dispatcher.add_handler(CommandHandler('stop', stop))
-    updater.dispatcher.add_handler(CommandHandler('send', send, pass_args=True))
+    updater.dispatcher.add_handler(CommandHandler('search', search, pass_args=True))
     updater.start_polling()
     updater.idle()
 
