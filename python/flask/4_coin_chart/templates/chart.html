@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+
+<div style="width:30%;">
+    <canvas id="canvas"></canvas>
+</div>
+
+<script>
+new Chart(document.getElementById("canvas"), {
+    type: 'line',
+    data: {
+        labels: {{ xlabels | tojson }},
+        datasets: [{
+            label: '{{ label }}',
+            data: {{ dataset | tojson }},
+            borderColor: "rgba(247, 16, 74, 1)",
+            fill: false,
+            lineTension: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: '{{ label }} 가격 변화'
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false,
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        scales: {
+            xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                }
+            }],
+            yAxes: [{
+                display: true,
+                ticks: {
+                },
+                scaleLabel: {
+                    display: true,
+                }
+            }]
+        }
+    }
+});
+
+</script>
+
+</html>
